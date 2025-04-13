@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RunInSight</title> 
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/course-style.css') }}">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <section class="header"> 
+        <nav>
+            <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='img/logo.png') }}" alt=""></a>
+            <div class="nav-links" id="navLinks">
+              <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('course_page') }}">Course</a></li>
+                <li><a href="{{ url_for('parkrun_page') }}">Packrun</a></li>
+                <li><a href="{{ url_for('blogs_page') }}">Blogs</a></li>
+                <li><a href="{{ url_for('login') }}">Login</a></li>
+              </ul>
+            </div>
+        </nav>
+      <div class="text-box">
+          <h1>Let’s Discover RunInSight Together!</h1>
+          <p>RunInSight is your all-in-one running companion — combining smart performance tracking, personalized strength training, injury prevention tools, and social features to help every runner thrive. Whether you're a beginner or a pro, this platform empowers you to run stronger, smarter, and happier.</p>
+          <a href="{{ url_for('login') }}" class="buttons">Start Your Running Journey Now</a>
+      </div>
+    </section>
+
+    <section class="course-section">
+        <div class="course-container">
+          <h1>Getting Started with Running: Building Your First Stride</h1>
+          <img src="../static/img/homepage/course-1.png" alt="First Stride">
+          <p>Whether you've never run before or are returning from a long hiatus, this beginner-friendly course is your safe and structured entry point into the world of running. No pressure, no comparisons — just solid guidance to help you get moving with confidence.</p>
+          <p>You'll learn how to choose shoes based on your gait, terrain preference, and budget — all demystified. We'll help you set weekly goals that are achievable, sustainable, and motivating. You’ll be introduced to warm-up and cool-down routines that protect your joints and prevent injuries, even if you’re only walking to start.</p>
+          <p>This course includes gentle movement tutorials, tips for syncing your breath with your steps, and guidance on how to listen to your body to avoid overtraining. By the end of it, you’ll be able to complete your first continuous run — no matter how short — and track your own growth, week by week.</p>
+          <ul>
+            <li>Choosing the right running shoes based on gait and terrain.</li>
+            <li>Setting achievable weekly goals that motivate you, not stress you.</li>
+            <li>Gentle warm-up and cool-down routines for joint protection.</li>
+            <li>Breathing rhythms and body awareness tips.</li>
+            <li>Progress tracking and when to push vs. rest.</li>
+          </ul>
+        </div>
+      
+        <div class="course-container">
+          <h1>Run Smart: Foundations of Form, Breathing, and Posture</h1>
+          <img src="../static/img/homepage/course-2.png" alt="Form and Breathing">
+          <p>This course is all about quality over quantity. Running efficiently means fewer injuries, better endurance, and a more enjoyable experience. We’ll break down common mistakes runners make — from heel-striking too hard to poor posture that saps energy — and show you exactly how to fix them.</p>
+          <p>You’ll get visual breakdowns of elite-level running form, posture drills you can do at home, and practice plans to help you implement what you learn. Breathing techniques like box breathing and rhythmic coordination are covered in-depth to help you avoid cramps and oxygen debt.</p>
+          <p>Whether you’re training for a 5K or simply want to feel lighter and stronger during runs, this course will transform how you move. Every week ends with a mini-challenge to test and reflect on your progress.</p>
+          <ul>
+            <li>Video breakdown of proper footstrike, arm swing, and head alignment.</li>
+            <li>Breathing strategies (box breathing, rhythmic breathing) for endurance.</li>
+            <li>Postural drills to correct slouching and boost efficiency.</li>
+            <li>Techniques for uphill/downhill running without strain.</li>
+            <li>Weekly challenges to track form consistency.</li>
+          </ul>
+        </div>
+      
+        <div class="course-container">
+          <h1>Mind & Motion: Preparing Your Body and Mind for the Road Ahead</h1>
+          <img src="../static/img/homepage/course-3.png" alt="Mental Preparation">
+          <p>This course addresses the mental and emotional side of running — often the hidden key to long-term consistency. You’ll learn to spot emotional fatigue, develop self-awareness, and build a running routine that works with your life, not against it.</p>
+          <p>Through daily mindset prompts, sleep and stress tracking, and guided reflection tools, you’ll become attuned to the signals your body and brain are sending. You’ll explore strategies for handling low-motivation days, building confidence, and mentally preparing for races or long runs.</p>
+          <p>We also dive into community connection: how mentorship, support groups, and shared milestones can boost morale and make running feel less lonely. By the end, you won’t just be physically stronger — you’ll be more resilient, mindful, and motivated than ever.</p>
+          <ul>
+            <li>Daily mindset journals and check-ins.</li>
+            <li>Energy logging: how mood, sleep, and nutrition affect your runs.</li>
+            <li>Stress recovery cycles and active rest techniques.</li>
+            <li>Guided visualization for race prep and goal-setting.</li>
+            <li>Support groups and mentor calls with advanced runners.</li>
+          </ul>
+        </div>
+      </section>
+      
+    
+  <section class="footer">
+    <h4>About us</h4>
+    <p>RunInSight is built by runners, for runners. Reach out through our social platforms — your feedback helps shape the journey.</p>
+    <div class="icons">
+      <i class="fa fa-facebook"></i>
+      <i class="fa fa-twitter"></i>
+      <i class="fa fa-instagram"></i>
+      <i class="fa fa-linkedin"></i>
+    </div>
+  </section>
+  <script>
+    function showMenu() {
+      document.getElementById("navLinks").style.right = "0";
+    }
+    function hideMenu() {
+      document.getElementById("navLinks").style.right = "-200px";
+    }
+  </script>
+</body>
+</html>

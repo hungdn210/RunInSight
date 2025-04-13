@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RunInSight</title> 
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/home-style.css') }}">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+  <section class="header"> 
+    <nav>
+      <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='img/logo.png') }}" alt=""></a>
+      <div class="nav-links" id="navLinks">
+        <ul>
+          <li><a href="{{ url_for('home') }}">Home</a></li>
+          <li><a href="{{ url_for('course_page') }}">Course</a></li>
+          <li><a href="{{ url_for('parkrun_page') }}">Packrun</a></li>
+          <li><a href="{{ url_for('blogs_page') }}">Blogs</a></li>
+          <li><a href="{{ url_for('login') }}">Login</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="text-box">
+        <h1>Let’s Discover RunInSight Together!</h1>
+        <p>RunInSight is your all-in-one running companion — combining smart performance tracking, personalized strength training, injury prevention tools, and social features to help every runner thrive. Whether you're a beginner or a pro, this platform empowers you to run stronger, smarter, and happier.</p>
+        <a href="{{ url_for('login') }}" class="buttons">Start Your Running Journey Now</a>
+    </div>
+  </section>
+
+
+
+  <section class="intro">
+    <h2>WE ARE RUNINSIGHT – A SMARTER WAY TO RUN, FOR EVERY TYPE OF RUNNER!</h2>
+    <p>Whether you're just starting out, chasing a personal best, or training with a coach, RunInSight gives you the tools to run stronger, safer, and smarter — all in one place.</p>
+    <p>We bring together data-driven insights, personalised training, and a community of runners to support every step of your journey.</p>
+    <p>From mood tracking and performance feedback to social features like Parkruns and Find a Runner, you’ll find everything you need to stay motivated, connected, and in control of your running goals.</p>
+    <p>And the best part? It’s completely free and designed to grow with you, no matter your pace or experience level.</p>
+  </section>
+
+  <div class="course-div">
+    <section class="typicalCourses">
+        <h1>Available Courses</h1>
+        <p>These courses will help you run smarter, train safely, and improve your performance step by step.</p>
+        
+      <div class="row">
+        <div class="typicalCourses-col">
+          <img src="../static/img/homepage/course-1.png" alt="">
+          <h3>Getting Started with Running: Building Your First Stride</h3>
+          <p>Learn the basics of running from the ground up — including how to choose the right shoes, set realistic goals, warm up properly, and ease into your first runs safely. This course is perfect for complete beginners or anyone returning to running after a break. We’ll guide you step by step so your first strides are confident and injury-free.</p>
+        </div>
+        <div class="typicalCourses-col">
+          <img src="../static/img/homepage/course-2.png" alt="">
+          <h3>Run Smart: Foundations of Form, Breathing, and Posture</h3>
+          <p>Master the core techniques that make running feel smoother and more efficient. You’ll discover how to improve your posture, run with good form, and breathe properly to reduce fatigue. Whether you're running for fun or fitness, these tips will help you avoid bad habits and enjoy every run more.
+
+          </p>
+        </div>
+        <div class="typicalCourses-col">
+          <img src="../static/img/homepage/course-3.png" alt="">
+          <h3>Mind & Motion: Preparing Your Body and Mind for the Road Ahead</h3>
+          <p>Running is as much mental as it is physical. This course introduces you to pre-run routines, mindset tools, and energy level tracking to help you stay motivated and in tune with your body. Learn how mood, stress, and mental focus affect performance — and how to use this knowledge to stay consistent and feel your best.</p>
+        </div>
+      </div>
+    </section>
+    
+    <div class="blogs-div">
+        <section class="runner-blogs">
+            <h1>Runner Stories</h1>
+            <p>Real experiences from our growing community — how RunInSight became more than just an app.</p>
+          
+            <div class="row">
+              <div class="blog-col">
+                <img src="../static/img/homepage/blog-user-1.png" alt="Runner Emily">
+                <h3>Jake Lee — The Comeback Runner</h3>
+                <p>
+                  “Running was once a part of who I was. But after a severe ankle injury and months of rehab, I felt lost. I’d scroll social media watching others improve while I feared every step would lead to re-injury. 
+                  <br><br>
+                  Then I found RunInSight. I started slow — tracking how I felt, logging short walks, and using the strength training recommendations to rebuild confidence. The mood and energy logging helped me become kinder to myself, recognizing that healing isn’t just physical. 
+                  <br><br>
+                  Slowly, I returned to 2K runs, then 5Ks. Last week, I hit 8K for the first time in two years. I’m not chasing speed anymore — I’m chasing sustainability. And RunInSight is my daily coach, quietly guiding me with insights I didn’t know I needed.”
+                </p>
+              </div>
+          
+              <div class="blog-col">
+                <img src="../static/img/homepage/blog-user-2.png" alt="Runner Jake">
+                <h3>Emily Rose — From Casual to Competitive</h3>
+                <p>
+                  “When I first downloaded RunInSight, I just wanted to lose some weight and run a few times a week. But then I started exploring the app: tracking heart rate zones, monitoring my recovery, and seeing how my mood affected performance. 
+                  <br><br>
+                  I discovered patterns. On days I logged better sleep and high energy, my pace improved. On days I pushed too hard back-to-back, the app gently flagged increased injury risk. It was like having a silent mentor who actually knew my habits. 
+                  <br><br>
+                  Within 3 months, I joined my first Parkrun. Now, I’m training for a half-marathon — something I never dreamed of before. This isn’t just an app. It’s a mindset shift. It helped me take running seriously, on my own terms.”
+                </p>
+              </div>
+            </div>
+          </section>
+    </div>
+  
+  <section class="footer">
+    <h4>About us</h4>
+    <p>RunInSight is built by runners, for runners. Reach out through our social platforms — your feedback helps shape the journey.</p>
+    <div class="icons">
+      <i class="fa fa-facebook"></i>
+      <i class="fa fa-twitter"></i>
+      <i class="fa fa-instagram"></i>
+      <i class="fa fa-linkedin"></i>
+    </div>
+  </section>
+  <script>
+    function showMenu() {
+      document.getElementById("navLinks").style.right = "0";
+    }
+    function hideMenu() {
+      document.getElementById("navLinks").style.right = "-200px";
+    }
+  </script>
+</body>
+</html>

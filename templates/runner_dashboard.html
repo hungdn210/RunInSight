@@ -1,0 +1,698 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RunInSight - Runner Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/runner-style.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    </head>
+    <body>
+    <section class="header">
+        <nav>
+        <a href="/home"><img src="../static/img/logo.png" alt=""></a>
+        <div class="nav-links" id="navLinks">
+            <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/course">Course</a></li>
+            <li><a href="/blogs">Blogs</a></li>
+            <li><a href="/about">About Us</a></li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            </ul>
+        </div>
+        </nav>
+    </section>
+
+    {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+        <div class="container mt-5">
+        <!-- Runner Dashboard Header -->
+        <div class="text-center mb-4">
+            <h1 class="display-4 text-primary">RunInSight  Dashboard</h1>
+            <p class="lead text-muted headline"  style="font-size: 25px;">DATA MEETS DETERMINATION</p>
+            <hr>
+        </div>
+
+        <!-- Form Section -->
+        <!-- Toggle Buttons for Workout & Strength Logging -->
+        <div class="text-center mb-4">
+            <button class="btn btn-primary me-2" data-bs-toggle="collapse" data-bs-target="#logWorkoutForm" aria-expanded="true" aria-controls="logWorkoutForm">
+            Log Your Workout
+            </button>
+            <button class="btn btn-secondary" data-bs-toggle="collapse" data-bs-target="#logStrengthForm" aria-expanded="false" aria-controls="logStrengthForm">
+            Log Strength Training
+            </button>
+        </div>
+    
+        <div class="collapse show" id="logWorkoutForm">
+            <div class="card shadow mb-5">
+                <div class="card-header bg-primary text-white">
+                    <h4  class="mb-0 txt1">Log Your Workout</h4>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="{{ url_for('add_workout') }}" class="row g-3">
+                        <!-- Subjective Data Section -->
+                        <h5 class="text-secondary mt-4"><i class="fas fa-brain me-2"></i>Subjective Data</h5>
+                        <div class="col-md-4">
+                            <label for="perceived_effort" class="form-label">Perceived Effort</label>
+                            <select class="form-select" id="perceived_effort" name="perceived_effort" required>
+                                <option value="Easy">Easy</option>
+                                <option value="Moderate">Moderate</option>
+                                <option value="Hard">Hard</option>
+                                <option value="Very Hard">Very Hard</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="mood" class="form-label">Mood/Feelings</label>
+                            <select class="form-select" id="mood" name="mood" required>
+                                <option value="Happy">Happy</option>
+                                <option value="Neutral">Neutral</option>
+                                <option value="Tired">Tired</option>
+                                <option value="Stressed">Stressed</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="fatigue_level" class="form-label">Fatigue Level</label>
+                            <select class="form-select" id="fatigue_level" name="fatigue_level" required>
+                                <option value="Low">Low</option>
+                                <option value="Moderate">Moderate</option>
+                                <option value="High">High</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="breathing" class="form-label">Breathing</label>
+                            <select class="form-select" id="breathing" name="breathing" required>
+                                <option value="Easy">Easy</option>
+                                <option value="Moderate">Moderate</option>
+                                <option value="Difficult">Difficult</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="pain_injury" class="form-label">Pain/Injury</label>
+                            <select class="form-select" id="pain_injury" name="pain_injury" required>
+                                <option value="None">None</option>
+                                <option value="Mild">Mild</option>
+                                <option value="Severe">Severe</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="enjoyment_motivation" class="form-label">Enjoyment/Motivation</label>
+                            <select class="form-select" id="enjoyment_motivation" name="enjoyment_motivation" required>
+                                <option value="Low">Low</option>
+                                <option value="Moderate">Moderate</option>
+                                <option value="High">High</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="pre_run_fuel" class="form-label">Pre-run Fuel (1-10)</label>
+                            <input type="range" class="form-range" id="pre_run_fuel" name="pre_run_fuel" min="1" max="10"  required>
+                            <small class="text-muted">Value: <span id="pre-run-fuel-value">5</span></small>
+                        </div>
+
+                        <!-- Objective Data Section -->
+                        <h5 class="text-secondary mt-4"><i class="fas fa-tachometer-alt me-2"></i>Objective Data</h5>
+                        <div class="col-md-4">
+                            <label for="pace" class="form-label">Pace per km</label>
+                            <input type="range" class="form-range" id="pace" name="pace" min="0" max="20" step="0.1" required>
+                            <small class="text-muted">Value: <span id="pace-value">10</span> km/h</small>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="distance" class="form-label">Distance (km)</label>
+                            <input type="range" class="form-range" id="distance" name="distance" min="0" max="50" step="0.1" required>
+                            <small class="text-muted">Value: <span id="distance-value">25</span> km</small>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="heart_rate" class="form-label">Average Heart Rate</label>
+                            <input type="range" class="form-range" id="heart_rate" name="heart_rate" min="50" max="200" required>
+                            <small class="text-muted">Value: <span id="heart-rate-value">125</span> bpm</small>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="time_taken" class="form-label">Time Taken (minutes)</label>
+                            <input type="range" class="form-range" id="time_taken" name="time_taken" min="0" max="300" required>
+                            <small class="text-muted">Value: <span id="time-taken-value">150</span> minutes</small>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="elevation_gain" class="form-label">Elevation Gain (m)</label>
+                            <input type="range" class="form-range" id="elevation_gain" name="elevation_gain" min="0" max="1000" required>
+                            <small class="text-muted">Value: <span id="elevation-gain-value">500</span> m</small>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="temperature" class="form-label">Temperature (°C)</label>
+                            <input type="range" class="form-range" id="temperature" name="temperature" min="-10" max="40" step="0.1" required>
+                            <small class="text-muted">Value: <span id="temperature-value">15</span> °C</small>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="humidity" class="form-label">Humidity (%)</label>
+                            <input type="range" class="form-range" id="humidity" name="humidity" min="0" max="100" required>
+                            <small class="text-muted">Value: <span id="humidity-value">50</span>%</small>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="col-12 text-end">
+                            <button type="submit" class="btn btn-success">Add Workout</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="collapse" id="logStrengthForm">
+            <div class="card shadow mb-5">
+            <div class="card-header bg-secondary text-white">
+                <h4 class="mb-0 txt1">Log Your Strength Training</h4>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="{{ url_for('add_strength_training') }}" class="row g-3">
+                <div class="col-md-6">
+                    <label for="exercise_type" class="form-label">Exercise Type</label>
+                    <select class="form-select" id="exercise_type" name="exercise_type" required>
+                    <option value="">Select</option>
+                    <option>Squats</option>
+                    <option>Deadlifts</option>
+                    <option>Lunges</option>
+                    <option>Planks</option>
+                    <option>Push-ups</option>
+                    <option>Yoga/Stretch</option>
+                    </select>
+                </div>
+        
+                <div class="col-md-3">
+                    <label for="sets" class="form-label">Sets</label>
+                    <input type="number" class="form-control" id="sets" name="sets" required>
+                </div>
+        
+                <div class="col-md-3">
+                    <label for="reps" class="form-label">Reps per Set</label>
+                    <input type="number" class="form-control" id="reps" name="reps" required>
+                </div>
+        
+                <div class="col-md-4">
+                    <label for="weight" class="form-label">Weight (kg)</label>
+                    <input type="number" class="form-control" id="weight" name="weight">
+                </div>
+        
+                <div class="col-md-4">
+                    <label for="duration" class="form-label">Duration (minutes)</label>
+                    <input type="number" class="form-control" id="duration" name="duration">
+                </div>
+        
+                <div class="col-md-4">
+                    <label for="notes" class="form-label">Notes</label>
+                    <textarea class="form-control" id="notes" name="notes" rows="1" placeholder="Optional..."></textarea>
+                </div>
+        
+                <div class="col-12 text-end">
+                    <button type="submit" class="btn btn-success">Add Strength Session</button>
+                </div>
+                </form>
+            </div>
+            </div>
+        </div>
+        
+
+    <!-- Perfomance Insights-->
+    <div class="container mt-5">
+        <h3 class="text-secondary">Performance InSights</h3>
+        <ul class="nav nav-tabs" id="insightsTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="distance-tab" data-bs-toggle="tab" href="#distance" role="tab" aria-controls="distance" aria-selected="true">Distance</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="speed-tab" data-bs-toggle="tab" href="#speed" role="tab" aria-controls="speed" aria-selected="false">Speed</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="heart-rate-tab" data-bs-toggle="tab" href="#heart-rate" role="tab" aria-controls="heart-rate" aria-selected="false">Heart Rate</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="subjective-tab" data-bs-toggle="tab" href="#subjective" role="tab" aria-controls="subjective" aria-selected="false">Subjective InSights</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="strength-tab" data-bs-toggle="tab" href="#strength" role="tab" aria-controls="strength" aria-selected="false">Strength Training</a>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="insightsTabContent">
+            <div class="tab-pane fade show active" id="distance" role="tabpanel" aria-labelledby="distance-tab">
+                <div class="chart-container">
+                    {{ distance_chart | safe }}
+                </div>
+            </div>
+            <div class="tab-pane fade" id="speed" role="tabpanel" aria-labelledby="speed-tab">
+                <div class="chart-container">
+                    {{ speed_chart | safe }}
+                </div>
+            </div>
+            <div class="tab-pane fade" id="heart-rate" role="tabpanel" aria-labelledby="heart-rate-tab">
+                <div class="chart-container">
+                    {{ heart_rate_chart | safe }}
+                </div>
+            </div>
+            <div class="tab-pane fade" id="subjective" role="tabpanel" aria-labelledby="subjective-tab">
+                <h4>Subjective Insights</h4>
+                <div class="chart-container">
+                    {{ mood_chart | safe }}
+                </div>
+                <div class="chart-container">
+                    {{ perceived_effort_chart | safe }}
+                </div>
+                <div class="chart-container">
+                    {{ fatigue_chart | safe }}
+                </div>
+            </div>
+            <div class="tab-pane fade" id="strength" role="tabpanel" aria-labelledby="strength-tab">
+                <div class="chart-container">
+                    {{ strength_chart | safe }}
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    
+        <!-- Workout History Section -->
+        <div class="mb-5">
+            <h3 class="text-secondary">Your Workouts</h3>
+            <table class="table table-striped table-hover">
+                <thead class="table-primary">
+                    <tr>
+                        <th>Date 📅</th>
+                        <th>Distance (km) 🏃‍♂️</th>
+                        <th>Time Taken ⏱</th>
+                        <th>Pace (min/km) 🐢</th>
+                        <th>Mood 🙂</th>
+                        <th>Actions ⚙️</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for workout in workouts %}
+                    <tr>
+                        <td>{{ workout.date.strftime('%Y-%m-%d') }}</td>
+                        <td>{{ workout.distance }}</td>
+                        <td>{{ workout.time_taken }}</td>
+                        <td>
+                            {% if workout.distance and workout.time_taken and workout.distance > 0 %}
+                                {{ (workout.time_taken / workout.distance) | round(2) }}
+                            {% else %}
+                                N/A
+                            {% endif %}
+                        </td>
+                        <td>{{ workout.mood }}</td>
+                        <td>
+                            <button
+                                class="btn btn-sm btn-warning"
+                                data-workout-id="{{ workout.id }}"
+                                data-bs-toggle="modal"
+                                data-bs-target="#editWorkoutModal"
+                            >
+                                Edit
+                            </button>
+                            <form method="POST" action="{{ url_for('delete_workout', workout_id=workout.id) }}" style="display: inline;">
+                                <button class="btn btn-sm btn-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+
+
+        <div class="section-wrapper">
+            <h4 class="section-title">Assigned Workouts</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Difficulty</th>
+                        <th>Steps</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for workout in assigned_workouts %}
+                    <tr>
+                        {% if workout.type == "Strength" %}
+                            <td>{{ workout.exercise_type or "Strength Training" }}</td>
+                            <td>Strength</td>
+                            <td>-</td>
+                            <td>
+                                {{ workout.sets or 0 }} sets × 
+                                {{ workout.reps or 0 }} reps × 
+                                {{ workout.weight or 0 }} kg
+                            </td>
+                        {% else %}
+                            <td>{{ workout.name }}</td>
+                            <td>{{ workout.type }}</td>
+                            <td>{{ workout.difficulty }}</td>
+                            <td>{{ workout.steps }}</td>
+                        {% endif %}
+                        <td>
+                            <button 
+                                class="btn btn-success complete-btn"
+                                data-workout-id="{{ workout.id }}"
+                                data-workout-type="{{ workout.type }}"
+                                data-bs-toggle="modal"
+                                data-bs-target="#completeWorkoutModal"
+                            >
+                                Mark as Completed
+                            </button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
+
+        <div class="section-wrapper">
+            <h4 class="section-title">Completed Workouts</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Difficulty</th>
+                        <th>Steps</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for workout in completed_workouts %}
+                    <tr>
+                        <td>{{ workout.name or workout.exercise_type or "Unnamed Workout" }}</td>
+                        <td>{{ workout.type }}</td>
+                        {% if workout.type == "Strength" %}
+                            <td>N/A</td>
+                            <td>
+                                {{ workout.sets or 0 }} sets × 
+                                {{ workout.reps or 0 }} reps × 
+                                {{ workout.weight or 0 }} kg
+                            </td>
+                        {% else %}
+                            <td>{{ workout.difficulty }}</td>
+                            <td>{{ workout.steps }}</td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
+
+        <div class="section-wrapper mt-5">
+            <h4 class="section-title mb-4 text-primary"><i class="fas fa-comments me-2"></i>Coach Conversations</h4>
+        
+            {% for workout in completed_workouts %}
+            {% if workout.coach_id %}
+            <div class="card mb-4 shadow-sm">
+                <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                <span><i class="fas fa-dumbbell me-2"></i>{{ workout.name }}</span>
+                <span class="badge bg-light text-dark">Workout ID: {{ workout.id }}</span>
+                </div>
+                <div class="card-body" style="background-color: #f9f9f9;">
+                <div class="chat-box" style="max-height: 300px; overflow-y: auto;">
+                    {% for feedback in feedbacks %}
+                    {% if feedback.workout_id == workout.id %}
+                        {% if feedback.from_runner %}
+                        <div class="text-end mb-3">
+                            <div class="d-inline-block text-start p-2 bg-primary text-white rounded">
+                            <strong>You:</strong> {{ feedback.feedback }}
+                            </div>
+                            <div class="text-muted small">{{ feedback.created_at.strftime('%Y-%m-%d %H:%M') }}</div>
+                        </div>
+                        {% else %}
+                        <div class="text-start mb-3">
+                            <div class="d-inline-block p-2 bg-light border rounded">
+                            <strong>Coach:</strong> {{ feedback.feedback }}
+                            </div>
+                            <div class="text-muted small">{{ feedback.created_at.strftime('%Y-%m-%d %H:%M') }}</div>
+                        </div>
+                        {% endif %}
+                    {% endif %}
+                    {% endfor %}
+                </div>
+        
+                <form action="{{ url_for('runner_feedback', workout_id=workout.id) }}" method="POST" class="mt-3">
+                    <input type="hidden" name="coach_id" value="{{ workout.coach_id }}">
+                    <div class="input-group">
+                    <textarea name="feedback" class="form-control" placeholder="Reply to your coach..." required></textarea>
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Send</button>
+                    </div>
+                </form>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>      
+        
+
+
+        <div class="modal fade" id="editWorkoutModal" tabindex="-1" aria-labelledby="editWorkoutModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editWorkoutModalLabel">Edit Workout</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form id="editWorkoutForm" method="POST" action="{{ url_for('edit_workout') }}">
+                        <div class="modal-body">
+                            <input type="hidden" id="edit-workout-id" name="workout_id">
+        
+                            <div class="mb-3">
+                                <label for="edit-distance" class="form-label">Distance (km)</label>
+                                <input type="number" class="form-control" id="edit-distance" name="distance" step="0.1" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="edit-time-taken" class="form-label">Time Taken (minutes)</label>
+                                <input type="number" class="form-control" id="edit-time-taken" name="time_taken" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="edit-mood" class="form-label">Mood/Feelings</label>
+                                <select class="form-select" id="edit-mood" name="mood" required>
+                                    <option value="Happy">Happy</option>
+                                    <option value="Neutral">Neutral</option>
+                                    <option value="Tired">Tired</option>
+                                    <option value="Stressed">Stressed</option>
+                                </select>
+                            </div>
+                            <!-- Add more fields as needed -->
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="completeWorkoutModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <form id="completeWorkoutForm" method="POST">
+                <div class="modal-header">
+                    <h5 class="modal-title">Complete Assigned Workout</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="completeWorkoutFormBody">
+                    <!-- Workout or Strength form content will be injected here -->
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Submit & Complete</button>
+                </div>
+                </form>
+            </div>
+            </div>
+        </div>
+        
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                // ✅ Function to update displayed values of range sliders and track interactions
+                const updateValue = (sliderId, valueId) => {
+                    let slider = document.getElementById(sliderId);
+                    let valueDisplay = document.getElementById(valueId);
+                    
+                    if (slider && valueDisplay) {
+                        valueDisplay.innerText = slider.value;
+            
+                        // Track if the slider is changed by user
+                        slider.dataset.changed = "true"; // Default to true to prevent false errors
+                        slider.addEventListener('input', (e) => {
+                            valueDisplay.innerText = e.target.value;
+                            slider.dataset.changed = "true"; // Mark as changed when moved
+                        });
+                    }
+                };
+            
+                // ✅ Apply updateValue function to all sliders
+                updateValue('pre_run_fuel', 'pre-run-fuel-value');
+                updateValue('pace', 'pace-value');
+                updateValue('distance', 'distance-value');
+                updateValue('heart_rate', 'heart-rate-value');
+                updateValue('time_taken', 'time-taken-value');
+                updateValue('elevation_gain', 'elevation-gain-value');
+                updateValue('temperature', 'temperature-value');
+                updateValue('humidity', 'humidity-value');
+            
+                // ✅ Open modal with pre-filled workout data
+                const editButtons = document.querySelectorAll('.btn-warning');
+                editButtons.forEach((button) => {
+                    button.addEventListener('click', (e) => {
+                        const workoutId = button.getAttribute('data-workout-id');
+                        const distance = button.getAttribute('data-distance');
+                        const timeTaken = button.getAttribute('data-time-taken');
+                        const mood = button.getAttribute('data-mood');
+            
+                        // Set values in modal
+                        document.getElementById('edit-workout-id').value = workoutId;
+                        document.getElementById('edit-distance').value = distance;
+                        document.getElementById('edit-time-taken').value = timeTaken;
+                        document.getElementById('edit-mood').value = mood;
+            
+                        // Show modal
+                        const editModal = new bootstrap.Modal(document.getElementById('editWorkoutModal'));
+                        editModal.show();
+                    });
+                });
+            
+            
+            });
+            
+            </script>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    const buttons = document.querySelectorAll('.complete-btn');
+                    const modalBody = document.getElementById('completeWorkoutFormBody');
+                    const form = document.getElementById('completeWorkoutForm');
+                
+                    buttons.forEach(button => {
+                        button.addEventListener('click', () => {
+                            const workoutId = button.dataset.workoutId;
+                            const workoutType = button.dataset.workoutType;
+                            form.action = `/complete_assignment/${workoutId}`;
+                
+                            if (workoutType === 'Strength') {
+                                modalBody.innerHTML = `
+                                    <div class="mb-3">
+                                        <label class="form-label">Sets</label>
+                                        <input type="number" class="form-control" name="sets" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Reps</label>
+                                        <input type="number" class="form-control" name="reps" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Weight (kg)</label>
+                                        <input type="number" class="form-control" name="weight">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Duration (minutes)</label>
+                                        <input type="number" class="form-control" name="duration">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Notes</label>
+                                        <textarea class="form-control" name="notes" rows="2"></textarea>
+                                    </div>
+                                `;
+                            } else {
+                                modalBody.innerHTML = `
+                                    <h5>Subjective Data</h5>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label>Perceived Effort</label>
+                                            <select name="perceived_effort" class="form-select" required>
+                                                <option>Easy</option><option>Moderate</option><option>Hard</option><option>Very Hard</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label>Mood</label>
+                                            <select name="mood" class="form-select" required>
+                                                <option>Happy</option><option>Neutral</option><option>Tired</option><option>Stressed</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label>Fatigue Level</label>
+                                            <select name="fatigue_level" class="form-select" required>
+                                                <option>Low</option><option>Moderate</option><option>High</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label>Breathing</label>
+                                            <select name="breathing" class="form-select" required>
+                                                <option>Easy</option><option>Moderate</option><option>Difficult</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label>Pain/Injury</label>
+                                            <select name="pain_injury" class="form-select" required>
+                                                <option>None</option><option>Mild</option><option>Severe</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label>Enjoyment/Motivation</label>
+                                            <select name="enjoyment_motivation" class="form-select" required>
+                                                <option>Low</option><option>Moderate</option><option>High</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                
+                                    <h5 class="mt-4">Objective Data</h5>
+                                    <div class="row">
+                                        <div class="col-md-4 mb-3">
+                                            <label>Pre-run Fuel (1-10)</label>
+                                            <input type="number" name="pre_run_fuel" class="form-control" min="1" max="10" required>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label>Pace (km/h)</label>
+                                            <input type="number" name="pace" class="form-control" step="0.1" required>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label>Distance (km)</label>
+                                            <input type="number" name="distance" class="form-control" step="0.1" required>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label>Heart Rate</label>
+                                            <input type="number" name="heart_rate" class="form-control" required>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label>Time Taken (min)</label>
+                                            <input type="number" name="time_taken" class="form-control" required>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label>Elevation Gain (m)</label>
+                                            <input type="number" name="elevation_gain" class="form-control" required>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label>Temperature (°C)</label>
+                                            <input type="number" name="temperature" class="form-control" step="0.1" required>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label>Humidity (%)</label>
+                                            <input type="number" name="humidity" class="form-control" required>
+                                        </div>
+                                    </div>
+                
+                                    <div class="mb-3">
+                                        <label class="form-label">Notes</label>
+                                        <textarea class="form-control" name="notes" rows="2"></textarea>
+                                    </div>
+                                `;
+                            }
+                        });
+                    });
+                });
+                </script>
+                
+            
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+    </html>

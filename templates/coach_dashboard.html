@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RunInSight - Runner Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/runner-style.css') }}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <section class="header">
+    <nav>
+        <a href="/home"><img src="../static/img/logo.png" alt=""></a>
+        <div class="nav-links" id="navLinks">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/course">Course</a></li>
+            <li><a href="/blogs">Blogs</a></li>
+            <li><a href="/about">About Us</a></li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+        </ul>
+        </div>
+    </nav>
+    </section>
+
+    <div class="container mt-5">
+    <div class="text-center mb-4">
+        <h1 class="display-4 text-primary">Coach Dashboard</h1>
+        <p class="lead text-muted headline" style="font-size: 25px;">GUIDING EVERY STRIDE WITH INSIGHT</p>
+        <hr>
+    </div>
+
+    <!-- Assigned Runners Section -->
+<div class="section-wrapper">
+    <h4 class="section-title">Assigned Runners</h4>
+    <table class="table table-hover">
+        <thead class="table-primary">
+            <tr>
+                <th>Runner Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for runner in runners %}
+            <tr>
+                <td>{{ runner.username }}</td>
+                <td>
+                    <a href="{{ url_for('view_runner', runner_id=runner.id) }}" class="btn btn-info btn-sm">View</a>
+                    <button class="btn btn-success btn-sm" 
+                            data-bs-toggle="modal" 
+                            data-bs-target="#assignWorkoutModal" 
+                            data-runner-id="{{ runner.id }}">
+                        Assign Session
+                    </button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Assign Session Modal -->
+<div class="modal fade" id="assignWorkoutModal" tabindex="-1" aria-labelledby="assignWorkoutModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="POST" action="{{ url_for('assign_workout') }}">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="assignWorkoutModalLabel">Assign Session</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="runner_id" id="runnerId">
+
+                    <div class="mb-3">
+                        <label for="assignmentType" class="form-label">Session Type</label>
+                        <select class="form-select" id="assignmentType" name="assignment_type" required>
+                            <option value="Workout">Workout</option>
+                            <option value="Strength">Strength Training</option>
+                        </select>
+                    </div>
+
+                    <!-- Workout Fields -->
+                    <div id="workoutFields">
+                        <div class="mb-3">
+                            <label for="workoutName" class="form-label">Workout Name</label>
+                            <input type="text" class="form-control" id="workoutName" name="workout_name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="workoutType" class="form-label">Workout Type</label>
+                            <select class="form-select" id="workoutType" name="workout_type">
+                                <option value="Interval">Interval</option>
+                                <option value="Long Run">Long Run</option>
+                                <option value="Recovery">Recovery</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="difficulty" class="form-label">Difficulty</label>
+                            <select class="form-select" id="difficulty" name="difficulty">
+                                <option value="Easy">Easy</option>
+                                <option value="Moderate">Moderate</option>
+                                <option value="Hard">Hard</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="steps" class="form-label">Workout Instructions</label>
+                            <textarea class="form-control" id="steps" name="steps" rows="3"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Strength Fields -->
+                    <div id="strengthFields" style="display:none;">
+                        <div class="mb-3">
+                            <label for="exercise_type" class="form-label">Exercise Type</label>
+                            <select class="form-select" name="exercise_type">
+                                <option>Squats</option>
+                                <option>Deadlifts</option>
+                                <option>Push-ups</option>
+                                <option>Yoga/Stretch</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="sets" class="form-label">Sets</label>
+                            <input type="number" class="form-control" name="sets">
+                        </div>
+                        <div class="mb-3">
+                            <label for="reps" class="form-label">Reps</label>
+                            <input type="number" class="form-control" name="reps">
+                        </div>
+                        <div class="mb-3">
+                            <label for="weight" class="form-label">Weight (kg)</label>
+                            <input type="number" class="form-control" name="weight">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Assign</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+    <!-- Chat-style Feedback Section -->
+    <div class="section-wrapper mt-5">
+        <h4 class="section-title text-primary"><i class="fas fa-comments me-2"></i>Conversations with Runners</h4>
+        {% for workout in completed_workouts %}
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            <span><i class="fas fa-dumbbell me-2"></i>{{ workout.name }}</span>
+            <span class="badge bg-light text-dark">Runner: {{ workout.runner.username }}</span>
+            </div>
+            <div class="card-body" style="background-color: #f9f9f9;">
+            <div class="chat-box" style="max-height: 300px; overflow-y: auto;">
+                {% for fb in feedbacks if fb.workout_id == workout.id %}
+                {% if fb.from_runner %}
+                    <div class="text-start mb-3">
+                    <div class="d-inline-block p-2 bg-light border rounded">
+                        <strong>{{ fb.runner.username }}:</strong> {{ fb.feedback }}
+                    </div>
+                    <div class="text-muted small">{{ fb.created_at.strftime('%Y-%m-%d %H:%M') }}</div>
+                    </div>
+                {% else %}
+                    <div class="text-end mb-3">
+                    <div class="d-inline-block text-start p-2 bg-primary text-white rounded">
+                        <strong>You:</strong> {{ fb.feedback }}
+                    </div>
+                    <div class="text-muted small">{{ fb.created_at.strftime('%Y-%m-%d %H:%M') }}</div>
+                    </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+            <form action="{{ url_for('give_feedback', workout_id=workout.id) }}" method="POST" class="mt-3">
+                <div class="input-group">
+                <textarea name="feedback" class="form-control" placeholder="Reply to runner..." required></textarea>
+                <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Send</button>
+                </div>
+            </form>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const assignWorkoutButtons = document.querySelectorAll('.btn-success');
+        assignWorkoutButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            const runnerId = this.getAttribute('data-runner-id');
+            document.getElementById('runnerId').value = runnerId;
+        });
+        });
+    });
+    document.addEventListener("DOMContentLoaded", function () {
+    const assignWorkoutButtons = document.querySelectorAll('.btn-success');
+    assignWorkoutButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            const runnerId = this.getAttribute('data-runner-id');
+            document.getElementById('runnerId').value = runnerId;
+        });
+    });
+
+    const assignmentTypeSelect = document.getElementById('assignmentType');
+    const workoutFields = document.getElementById('workoutFields');
+    const strengthFields = document.getElementById('strengthFields');
+
+    assignmentTypeSelect.addEventListener('change', function () {
+        if (this.value === 'Workout') {
+            workoutFields.style.display = 'block';
+            strengthFields.style.display = 'none';
+        } else {
+            workoutFields.style.display = 'none';
+            strengthFields.style.display = 'block';
+        }
+    });
+});
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

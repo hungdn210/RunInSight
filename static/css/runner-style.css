@@ -1,0 +1,295 @@
+* {
+    margin: 0;
+    padding: 0; 
+    font-family: 'Poppins', sans-serif;
+   }
+   p {
+    font-family: 'Poppins', sans-serif;
+   }
+   
+   .header {
+    width: 100%;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+   }
+   nav{ 
+    display: flex;
+    padding: 1.5% 6% 0% 6%;
+    justify-content: space-between;
+    align-items: center;
+   }
+   nav img {
+     height: 200px;
+   }
+   .nav-links {
+    flex: 1;
+    text-align: right;
+   }
+   .nav-links ul li{
+    list-style: none;
+    display: inline-block;
+    padding: 8px 12px;
+    position: relative;
+    bottom: 50px;
+   }
+   .nav-links ul li ::after {
+    content: '';
+    width:  0%;
+    height: 2px;
+    background: rgb(10,177,211);
+    display: block;
+    margin: auto;
+    transition: 0.5s;
+   }
+   .nav-links ul li :hover::after {
+    width: 100%;
+   }
+   .nav-links ul li a {
+    color: rgb(90,92,95);
+    text-decoration: none;
+    font-size: 20px;
+   }
+/* Background for Runner Dashboard */
+body {
+    background-color: #f5f7fa; /* Light background for readability */
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto;
+}
+.container {
+    min-height: 100vh; /* Ensure the container takes at least the full viewport height */
+    padding-bottom: 50px; /* Add some padding to avoid content cutting off at the bottom */
+}
+
+/* Header Styling */
+.text-primary {
+    color: #1e294a; /* Dark navy for contrast */
+    font-weight: bold;
+}
+
+.text-secondary {
+    color: #6c757d; /* Subtle gray for secondary text */
+}
+
+/* Card Styling */
+.card {
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 20px;
+}
+
+/* Card Header */
+.card-header {
+    background-color: #1e294a; /* Navy header */
+    color: #ffffff;
+    padding: 15px;
+    border-radius: 8px 8px 0 0;
+    font-size: 1.25rem;
+}
+
+/* Table Styling */
+table th {
+    background-color: #e3f2fd;
+    font-weight: bold;
+    text-align: center;
+}
+
+table td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.table-striped tbody tr:nth-child(odd) {
+    background-color: #f8f9fa;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #e9ecef;
+}
+table tbody tr:hover {
+    background-color: #f1f1f1 !important;
+    cursor: pointer;
+}
+
+.table-striped tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Button Styling */
+.btn {
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.btn-success {
+    background-color: #28a745;
+    color: white;
+    font-size: 0.9rem;
+    padding: 8px 14px;
+    border-radius: 5px;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+}
+
+.btn-warning {
+    background-color: #ffc107;
+    color: black;
+}
+
+.btn-warning:hover {
+    background-color: #e0a800;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+
+
+.nav-tabs {
+    border-bottom: 2px solid #ddd;
+}
+
+.nav-link {
+    color: #6c757d;
+    font-weight: bold;
+}
+
+.nav-link.active {
+    background-color: #1e294a;
+    color: white;
+    border-color: #ddd #ddd #fff;
+}
+
+.tab-content {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+
+
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    font-size: 0.95rem;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+thead {
+    background-color: #004aad;
+    color: white;
+    text-align: left;
+}
+
+table th, table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #ddd;
+    color: black;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.btn-success {
+    background-color: #28a745;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+
+
+
+
+
+
+/* ✅ Titles & Headings Styling */
+h1, h2, h3,  h5, label {
+    font-weight: bold !important;
+    color: #004aad !important; /* Brighter Blue */
+}
+
+/* ✅ Section Titles */
+h1 {
+    font-size: 3rem; /* Main Title */
+}
+
+h2 {
+    font-size: 1.8rem; /* Section Titles */
+    text-decoration: underline; /* Optional for emphasis */
+}
+
+h3 {
+    font-size: 2.5rem;
+}
+
+.headline{
+    font-weight: bold !important;
+    color: #004aad !important; /* Brighter Blue */
+
+
+}
+
+h5 {
+    font-size: 1.3rem;
+}
+
+/* ✅ Labels for Form Inputs */
+label {
+    font-size: 1.3rem;
+    color: #004aad !important; /* Ensure Blue */
+}
+
+.txt1{
+    color: white;
+}
+.card {
+    background: #fdfdfd;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  }
+  .alert {
+    width: fit-content;
+    min-width: 70%;
+    max-width: 100%;
+    margin: 20px auto;
+    padding: 15px 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+.section-wrapper {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.section-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #5a5c5f; /* Matches the gray tone in the image */
+    margin-bottom: 15px;
+    font-family: 'Poppins', sans-serif;
+}

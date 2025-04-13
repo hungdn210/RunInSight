@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Runner Details</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='view_runner.css') }}">
+</head>
+<body>
+    <h1 class="title">Runner: {{ runner.username }}</h1>
+    
+    <h2 class="subtitle">Workouts</h2>
+    <table class="workout-table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Date</th>
+                <th>Distance (km)</th>
+                <th>Time (min)</th>
+                <th>Pace (km/h)</th>
+                <th>Heart Rate (bpm)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for workout in workouts %}
+            <tr class="{% if loop.index is divisibleby 2 %}even-row{% else %}odd-row{% endif %}">
+                <td>{{ loop.index }}</td>
+                <td>{{ workout.date.strftime('%Y-%m-%d') }}</td>
+                <td>{{ workout.distance }}</td>
+                <td>{{ workout.time_taken }}</td>
+                <td>{{ workout.pace }}</td>
+                <td>{{ workout.heart_rate }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2 class="subtitle">Performance Charts</h2>
+    <div id="charts">
+        <div class="chart-container">
+            {{ distance_chart|safe }}
+        </div>
+        <div class="chart-container">
+            {{ speed_chart|safe }}
+        </div>
+        <div class="chart-container">
+            {{ heart_rate_chart|safe }}
+        </div>
+    </div>
+
+    <h2 class="subtitle">Subjective Data Charts</h2>
+    <div id="subjective-charts">
+        <div class="chart-container">
+            {{ mood_chart|safe }}
+        </div>
+        <div class="chart-container">
+            {{ perceived_effort_chart|safe }}
+        </div>
+        <div class="chart-container">
+            {{ fatigue_chart|safe }}
+        </div>
+    </div>
+
+    <a href="{{ url_for('coach_dashboard') }}" class="back-link">Back to Coach Dashboard</a>
+</body>
+</html>

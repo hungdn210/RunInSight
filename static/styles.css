@@ -1,0 +1,361 @@
+/* General Styling */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #0d0d2d;
+    height: 100%;
+    overflow: hidden; /* Hide scrollbars */
+}
+
+/* Background Styling */
+#particles-js {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #0d0d2d; /* Match the overall theme */
+    z-index: -1; /* Keep it behind the content */
+}
+
+/* Logo Styling */
+.logo-container {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.logo {
+    width: 400px; /* Increased size from 200px to 300px */
+    animation: float 3s ease-in-out infinite;
+}
+
+/* Floating Animation for Logo */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Welcome Text Styling */
+.welcome-text {
+    text-align: center;
+    color: white;
+    font-size: 2.5rem;
+    margin-top: 20px;
+    animation: fade-in-text 2s ease-in-out;
+}
+
+.highlight {
+    color: #00bfff;
+    font-weight: bold;
+}
+
+.subtitle {
+    text-align: center;
+    color: #c8d1e0;
+    font-size: 1.2rem;
+    margin-top: 10px;
+}
+
+/* Buttons Below Text */
+.btn-container {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.btn {
+    display: inline-block;
+    background-color: #00bfff;
+    color: white;
+    text-decoration: none;
+    padding: 100px 400px; /* Increased padding for larger buttons */
+    margin: 15px; /* Adjusted margin for spacing */
+    border-radius: 8px; /* Slightly rounded corners */
+    font-weight: bold;
+    font-size: 1.2rem; /* Increased font size for better readability */
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.btn:hover {
+    transform: scale(1.15); /* Slightly larger scale effect on hover */
+    box-shadow: 0px 6px 20px rgba(0, 191, 255, 0.6); /* Enhanced shadow effect */
+}
+
+
+/* Fade-in Animation for Text */
+@keyframes fade-in-text {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
+
+
+
+
+/* Navbar Link Styling */
+.navbar-nav .nav-link {
+    color: white !important; /* Ensure all links are white */
+    font-weight: bold;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #f8f9fa !important; /* Light gray on hover */
+}
+
+/* Ensure Logout Text is Always Visible */
+.logout-link {
+    color: white !important;
+    font-weight: bold;
+}
+
+.logout-link:hover {
+    color: #f8f9fa !important;
+}
+
+
+
+/*  404 template styles */
+.error-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: linear-gradient(145deg, #1d3557, #457b9d);
+    color: white;
+    text-align: center;
+}
+
+.error-code {
+    font-size: 10rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+.error-message {
+    font-size: 1.5rem;
+    margin: 10px 0;
+}
+
+.btn {
+    display: inline-block;
+    background-color: #00bfff;
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 4px 15px rgba(0, 191, 255, 0.5);
+}
+
+
+/* ✅ Navbar Logo Styling */
+.navbar-logo {
+    height: 40px;  /* Adjust size */
+    width: auto;   /* Maintain aspect ratio */
+    margin-right: 10px; /* Space between logo and text */
+}
+
+
+
+
+
+
+.btn {
+    display: inline-block;
+    background-color: #00bfff;
+    color: white;
+    text-decoration: none;
+    /* Keep your existing padding and font-size as desired */
+    padding: 100px 400px;
+    font-size: 1.2rem;
+
+    /* Round corners */
+    border-radius: 30px; /* Increase or decrease for more/less roundness */
+
+    /* Spacing, transitions, etc. */
+    margin: 15px;
+    font-weight: bold;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.btn:hover {
+    transform: scale(1.15);
+    box-shadow: 0px 6px 20px rgba(0, 191, 255, 0.6);
+    /* The border-radius will remain consistent on hover,
+       but if you want it to animate, you can keep it here too. */
+}
+
+
+
+
+
+
+
+/* Position container in top-left */
+.top-left-logo-container {
+    position: absolute;
+    top: 55px;
+    left: 20px;
+    display: flex;
+    flex-direction: column; /* Logo on top, circle below */
+    align-items: center;    /* Center them horizontally in this container */
+}
+
+/* Parkrun logo styling */
+.parkrun-logo {
+    width: 150px; 
+    height: 75px;         /* Adjust as desired */
+    margin-bottom: 10px;   /* Space between logo and circle */
+}
+
+/* Circular “Find a Runner” button */
+.circle-btn {
+    width: 150px;          /* Circle width */
+    height: 100px;         /* Circle height */
+    background-color: #00bfff;  /* Choose a color that suits your design */
+    border-radius: 50%;    /* Make it perfectly round */
+    display: flex;
+    align-items: center;   /* Vertically center text */
+    justify-content: center; /* Horizontally center text */
+}
+
+/* Text inside the circle */
+.circle-text {
+    color: #fff;             /* White text on a blue circle */
+    text-decoration: none;   /* Remove underline */
+    font-weight: bold;
+    text-align: center;
+    font-size: 0.9rem;       /* Adjust text size as needed */
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+
+
+
+
+
+
+
+
+
+
+/****************************************************/
+/* Parkrun Page Specific Styles                     */
+/****************************************************/
+
+/* Overall body styling if you want a teal background 
+   specifically for parkrun page. Otherwise, keep your 
+   existing #0d0d2d. */
+
+   body.parkrun-body {
+    background-color: #008ecc; /* Or #00bfff if you prefer */
+    color: #ffffff; 
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    /* If you do not want scroll hidden, remove overflow: hidden */
+}
+
+/* Header container */
+.parkrun-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #00bfff;  /* or another accent color */
+    padding: 10px 20px;
+}
+
+/* Left side of header (logo) */
+.parkrun-header-left {
+    display: flex;
+    align-items: center;
+}
+
+.parkrun-logo-header {
+    width: 120px; /* Adjust to taste */
+    height: auto;
+}
+
+/* Right side of header (links) */
+.parkrun-header-right {
+    display: flex;
+    gap: 20px;
+}
+
+/* Navigation links */
+.parkrun-header-right .nav-link {
+    color: #ffffff; 
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.parkrun-header-right .nav-link:hover {
+    text-decoration: underline;
+}
+
+/* Main content area */
+.parkrun-main {
+    text-align: center;
+    padding: 50px 20px;
+    /* If you want to override the body background for main area, you can do it here. */
+}
+
+.parkrun-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 30px;
+    max-width: 800px;
+    margin: 0 auto 30px auto; /* Center text block */
+}
+
+/* Map container and image */
+.map-container {
+    display: inline-block;
+    margin-bottom: 30px;
+}
+
+.map-image {
+    width: 500px; /* Adjust as needed */
+    max-width: 100%;
+    height: auto;
+    border: 2px solid #fff;
+    border-radius: 8px;
+}
+
+/* Example orange button */
+.orange-button {
+    background-color: #ff9900; 
+    color: #fff;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.orange-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 6px 20px rgba(255, 153, 0, 0.5);
+}

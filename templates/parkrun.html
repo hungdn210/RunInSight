@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Parkrun Community</title>
+  <!-- Link to your existing stylesheet -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body class="parkrun-body">  <!-- Applies the teal background to this page -->
+
+  <!-- Top Navigation Section -->
+  <header class="parkrun-header">
+    <!-- Left side: Parkrun logo -->
+    <div class="parkrun-header-left">
+      <img src="../static/img/parkrun1.png" 
+           alt="Parkrun Logo" 
+           class="parkrun-logo-header">
+    </div>
+
+    <!-- Right side: "about", "sign in", and search icon -->
+    <nav class="parkrun-header-right">
+      <a href="#" class="nav-link">about</a>
+      <a href="#" class="nav-link">sign in</a>
+      <a href="#" class="nav-link search-icon">🔍</a>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="parkrun-main">
+    <h1 class="parkrun-title">
+      JOIN A COMMUNITY OF RUNNERS, MATCH BY ABILITY, AND MAKE RUNNING MORE SOCIAL
+    </h1>
+
+    <!-- Map area -->
+    <div class="map-container">
+      <!-- Replace with your real map image or embed -->
+      <img src="../static/img/parkrunMap.png" 
+           alt="Map of Running Locations" 
+           class="map-image">
+    </div>
+    <section class="parkrun-map">
+      <h2>Find a Parkrun Near You 🗺️</h2>
+      <p>Use the interactive map below to discover 5k and junior Parkrun events across the UK and Ireland.</p>
+      <a href="https://www.parkrun.org.uk/events/events/#geo=5.69/54.126/-3.984" target="_blank">
+        <p style="margin-top: 10px; font-weight: bold;">Click here to open the live map</p>
+      </a>
+    </section>
+
+    <!-- Orange CTA Button -->
+    <button class="orange-button">Find Your Parkrun</button>
+  </main>
+
+</body>
+</html>

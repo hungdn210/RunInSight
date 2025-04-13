@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RunInSight</title> 
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/blogs-style.css') }}">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <section class="header"> 
+        <nav>
+            <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='img/logo.png') }}" alt=""></a>
+            <div class="nav-links" id="navLinks">
+              <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('course_page') }}">Course</a></li>
+                <li><a href="{{ url_for('parkrun_page') }}">Packrun</a></li>
+                <li><a href="{{ url_for('blogs_page') }}">Blogs</a></li>
+                <li><a href="{{ url_for('login') }}">Login</a></li>
+              </ul>
+            </div>
+        </nav>
+      <div class="text-box">
+          <h1>Let’s Discover RunInSight Together!</h1>
+          <p>RunInSight is your all-in-one running companion — combining smart performance tracking, personalized strength training, injury prevention tools, and social features to help every runner thrive. Whether you're a beginner or a pro, this platform empowers you to run stronger, smarter, and happier.</p>
+          <a href="{{ url_for('login') }}" class="buttons">Start Your Running Journey Now</a>
+      </div>
+    </section>
+
+    <section class="blog-section">
+        <div class="blog-card">
+          <img src="../static/img/homepage/blog-user-1.png" alt="Jake Lee">
+          <h2>Jake Lee — The Comeback Runner</h2>
+          <p>Running was once a part of who I was. But after a severe ankle injury and months of rehab, I felt lost. Watching others improve while I feared re-injury was tough.
+          </p>
+          <p>I found RunInSight during my lowest. I began with small walks, mood tracking, and injury-safe strength training. The platform helped me rebuild trust in my body and reset my mindset.
+          </p>
+          <p>Eventually, I progressed from 2K to 5K runs, and recently completed my first 8K in two years. I'm not chasing speed anymore. I'm chasing longevity and peace with my running identity.
+          </p>
+        </div>
+    
+        <div class="blog-card">
+          <img src="../static/img/homepage/blog-user-2.png" alt="Emily Rose">
+          <h2>Emily Rose — From Casual to Competitive</h2>
+          <p>I downloaded RunInSight to help with weight loss and stay active. At first, it was just an app — but it quickly became my coach, motivator, and tracker.
+          </p>
+          <p>Heart rate tracking, energy logging, and recovery insights showed me patterns. I learned to listen to my body. On good energy days, I pushed. On fatigue days, I rested guilt-free.
+          </p>
+          <p>I joined my first Parkrun within three months. Now, I’m training for a half-marathon. RunInSight made me believe in my own rhythm and strength. It’s not just about running. It’s about growth.
+          </p>
+        </div>
+    
+        <div class="blog-card">
+          <img src="../static/img/homepage/blog-user-3.png" alt="Sofia Patel">
+          <h2>Sofia Patel — Running Through the Seasons</h2>
+          <p>For me, running is therapy. I started with 1K jogs just to get fresh air after stressful workdays. But I wasn’t improving — I kept hitting walls.
+          </p>
+          <p>RunInSight changed that. By logging not only runs but my mental state, hydration, and stress levels, I realized how much external factors affected my performance.
+          </p>
+          <p>Seasonal affective dips, hormonal shifts, even skipped meals — the platform helped me understand and adapt. I now run 4 days a week and my winter blues are so much lighter.
+          </p>
+        </div>
+    
+        <div class="blog-card">
+          <img src="../static/img/homepage/blog-user-4.png" alt="Marcus Nguyen">
+          <h2>Marcus Nguyen — The Night Runner</h2>
+          <p>With a hectic job and two kids, I can only run after 9pm. It used to feel unsafe, rushed, and lonely.
+          </p>
+          <p>RunInSight helped me feel part of a community even during solo runs. I log my feelings, track my effort, and reflect. The night becomes my reset button, not a burden.
+          </p>
+          <p>I also learned about proper fueling and rest, even for nighttime runners. I now look forward to these peaceful runs under streetlights. They’re mine.
+          </p>
+        </div>
+      </section>
+      
+    
+  <section class="footer">
+    <h4>About us</h4>
+    <p>RunInSight is built by runners, for runners. Reach out through our social platforms — your feedback helps shape the journey.</p>
+    <div class="icons">
+      <i class="fa fa-facebook"></i>
+      <i class="fa fa-twitter"></i>
+      <i class="fa fa-instagram"></i>
+      <i class="fa fa-linkedin"></i>
+    </div>
+  </section>
+  <script>
+    function showMenu() {
+      document.getElementById("navLinks").style.right = "0";
+    }
+    function hideMenu() {
+      document.getElementById("navLinks").style.right = "-200px";
+    }
+  </script>
+</body>
+</html>

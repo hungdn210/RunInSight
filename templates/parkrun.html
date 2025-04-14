@@ -19,9 +19,11 @@
 
     <!-- Right side: "about", "sign in", and search icon -->
     <nav class="parkrun-header-right">
-      <a href="#" class="nav-link">about</a>
-      <a href="#" class="nav-link">sign in</a>
-      <a href="#" class="nav-link search-icon">🔍</a>
+      <li><a href="{{ url_for('home') }}">Home</a></li>
+      <li><a href="{{ url_for('course_page') }}">Course</a></li>
+      <li><a href="{{ url_for('parkrun_page') }}">Packrun</a></li>
+      <li><a href="{{ url_for('blogs_page') }}">Blogs</a></li>
+      <li><a href="{{ url_for('login') }}">Login</a></li>
     </nav>
   </header>
 
@@ -48,6 +50,11 @@
 
     <!-- Orange CTA Button -->
     <button class="orange-button">Find Your Parkrun</button>
+    <!-- New "Find a Runner" Button -->
+     <br>
+     <br>
+     <br>
+    <button class="orange-button">Find A Runner</button>
   </main>
 
 </body>

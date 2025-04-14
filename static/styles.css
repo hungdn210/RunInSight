@@ -51,6 +51,28 @@ body, html {
     color: #00bfff;
     font-weight: bold;
 }
+li{
+    list-style: none;
+    display: inline-block;
+    padding: 8px 12px;
+    position: relative;
+    text-decoration: none!important;
+    color: white;
+   }
+li ::after {
+content: '';
+width:  0%;
+height: 2px;
+background: rgb(10,177,211);
+display: block;
+margin: auto;
+transition: 0.5s;
+}
+li a {
+    text-decoration: none!important;
+    color: white;
+    font-size: 20px;
+}
 
 .subtitle {
     text-align: center;
